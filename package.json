@@ -1,0 +1,44 @@
+{
+  "name": "m4l-lib",
+  "version": "1.0.0",
+  "description": "A utility library for Max for Live (M4L) operations, providing helpful functions for interacting with Ableton Live's API",
+  "main": "lib/pdm.m4l.lib.js",
+  "keywords": [
+    "max-for-live",
+    "ableton-live",
+    "midi",
+    "audio",
+    "music-production",
+    "live-api",
+    "javascript"
+  ],
+  "author": "Philip Meyer",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pdmeyer/M4LLib.git"
+  },
+  "bugs": {
+    "url": "https://github.com/pdmeyer/M4LLib/issues"
+  },
+  "homepage": "https://github.com/pdmeyer/M4LLib#readme",
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "docs": "echo \"Documentation is in the docs/ folder\"",
+    "lint": "echo \"Linting not yet configured\"",
+    "build": "echo \"No build step required for M4L library\""
+  },
+  "devDependencies": {},
+  "peerDependencies": {},
+  "files": [
+    "lib/",
+    "docs/",
+    "examples/",
+    "README.md",
+    "LICENSE",
+    "CHANGELOG.md"
+  ]
+}

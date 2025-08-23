@@ -1,0 +1,220 @@
+# M4LLib Development Rules
+
+## Project Context
+You are working on M4LLib, a utility library for Max for Live (M4L) operations. This library provides helpful functions for interacting with Ableton Live's API within Max for Live devices.
+
+## Max JavaScript Environment Context
+
+**CRITICAL**: M4LLib runs in the Max for Live JavaScript environment, which is fundamentally different from browser or Node.js environments.
+
+### Max JavaScript API
+- **Reference**: [Max JavaScript API Documentation](https://docs.cycling74.com/apiref/js/)
+- **Environment**: JavaScript runs within Max objects like `[js]`, `[jsui]`, `[v8]`, `[v8.codebox]`, and `[v8ui]`
+- **Threading**: Cannot run in high-priority thread; use `defer` or `deferlow` objects
+
+### Max-Specific Classes and Functions
+- **`LiveAPI`**: Primary interface for communicating with Ableton Live API
+- **`Task`**: Max's task scheduling system (use instead of `setTimeout`)
+- **`Dict`**: Max dictionary object for data storage
+- **`messnamed`**: Send messages to named Max objects
+- **`post`/`error`/`cpost`**: Console output functions
+- **`jsthis`**: Context object for Max JavaScript environment
+
+### Browser/Node.js Limitations
+- **NO `setTimeout`** - Use Max's `Task` system instead
+- **NO `async/await`** - Use callbacks or Max's defer system
+- **NO `fetch`** - Use Max's file I/O or network objects
+- **NO `console.log`** - Use `post()` for output
+- **NO `Promise`** - Use callbacks or Max's event system
+
+### LiveAPI Class
+- **Reference**: [LiveAPI Documentation](https://docs.cycling74.com/apiref/js/liveapi/)
+- **Purpose**: Communicate with Ableton Live's API from JavaScript
+- **Key Methods**: `get()`, `set()`, `call()`, `goto()`
+- **Properties**: `id`, `path`, `children`, `property`
+- **Resource Management**: Always call `freepeer()` when done
+
+### Live Object Model
+- **Reference**: [Live Object Model Documentation](https://docs.cycling74.com/apiref/lom/)
+- **Purpose**: Defines the structure and properties of Live objects
+- **Usage**: Reference for understanding what properties and methods are available
+
+## JS User Guide
+- **Reference** : [JS User Guide](https://docs.cycling74.com/userguide/javascript/)
+- **Purpose**: Documents general usage patterns of JS inside of Max for Live, including how to import external libraries. It also explains how global code and initialization work
+
+## Code Style & Standards
+
+### JavaScript Standards
+- Use ES6+ features when possible
+- Follow JSDoc documentation standards
+- Maintain consistent indentation (2 spaces)
+- Use descriptive variable names
+- Add comprehensive error handling for all public methods
+
+### Max for Live Specific
+- Always free LiveAPI objects with `freepeer()`
+- Use consistent ID handling (numeric IDs internally)
+- Validate all inputs before processing
+- Provide helpful error messages
+- Handle errors gracefully with try-catch blocks
+
+### Error Handling
+- Use the custom error classes from `m4l-errors.js`
+- Always wrap operations in try-catch blocks
+- Use `M4LLibErrors.ErrorHandler.handle()` for consistent error handling
+- Provide meaningful error context and debugging information
+
+## Architecture Guidelines
+
+### Function Design
+- Keep functions focused and single-purpose
+- Use static methods for utility functions
+- Validate all parameters at function entry
+- Return meaningful values (avoid undefined returns)
+- Document all public methods with JSDoc
+
+### Resource Management
+- Always clean up LiveAPI objects in finally blocks
+- Use defer() for operations that can't run immediately
+- Batch operations when possible
+- Avoid creating unnecessary LiveAPI objects
+
+### Max-Specific Patterns
+- Use `Task` instead of `setTimeout` for scheduling
+- Use `Dict` objects for data storage instead of localStorage
+- Use `messnamed` for inter-object communication
+- Use `post()`, `error()`, `cpost()` for console output
+- Use Max's defer system instead of async/await
+
+## Documentation Requirements
+
+### JSDoc Standards
+- Document all public methods with @static, @param, @returns, @throws
+- Include @example for complex methods
+- Use @since for version tracking
+- Document parameter types and constraints
+
+### Code Comments
+- Explain complex Live API operations
+- Document ID handling conventions
+- Comment on error handling strategies
+- Note performance considerations
+
+## Testing & Quality
+
+### Input Validation
+- Validate all external inputs
+- Use ValidationUtils for common checks
+- Provide clear error messages for invalid inputs
+- Test edge cases and boundary conditions
+
+### Error Scenarios
+- Test with invalid IDs
+- Test with missing Live objects
+- Test with unsupported track types
+- Test error recovery mechanisms
+
+## AI Assistant Guidelines
+
+When helping with code:
+
+1. **Understand the Max for Live context** - this is JavaScript running in Max, not Node.js
+2. **Suggest appropriate error handling** - always include try-catch and resource cleanup
+3. **Recommend M4LLib functions** - suggest existing library functions when possible
+4. **Explain Live API concepts** - help understand how Ableton Live objects work
+5. **Provide complete examples** - include error handling and cleanup code
+6. **Use Max-specific patterns** - suggest `Task` instead of `setTimeout`, `Dict` instead of localStorage, etc.
+7. **Avoid browser/Node.js patterns** - never suggest `async/await`, `fetch`, `console.log`, etc.
+8. **Reference Max documentation** - point to [Max JavaScript API](https://docs.cycling74.com/apiref/js/) and [Live Object Model](https://docs.cycling74.com/apiref/lom/)
+
+## Common Patterns
+
+### Creating MIDI Clips
+```javascript
+try {
+    const trackId = M4LLib.getThisTrackId();
+    const notes = { notes: [{ pitch: 60, start_time: 0, duration: 1, velocity: 100 }] };
+    const success = M4LLib.dumpNoteToNextEmptyClipForTrack(trackId, notes, "My Clip");
+    return success;
+} catch (error) {
+    M4LLibErrors.ErrorHandler.handle(error, 'createMidiClip', false);
+    return false;
+}
+```
+
+### Working with IDs
+```javascript
+// Convert various ID formats to numeric
+const numericId = M4LLib.conformId("id 123");
+
+// Validate before use
+if (M4LLib.validateId(numericId)) {
+    // Use the ID
+}
+
+// Add prefix when needed for LiveAPI
+const liveApi = new LiveAPI(M4LLib.prefixId(numericId));
+```
+
+### Resource Management
+```javascript
+let liveApi = null;
+try {
+    liveApi = new LiveAPI('some_path');
+    // Use liveApi
+} catch (error) {
+    M4LLibErrors.ErrorHandler.handle(error, 'methodName', false);
+} finally {
+    if (liveApi) liveApi.freepeer();
+}
+```
+
+### Max-Specific Patterns
+```javascript
+// Task scheduling instead of setTimeout
+const task = new Task(function() {
+    post('This runs after delay\n');
+}, null, []);
+task.schedule(1000); // 1 second delay
+
+// Data storage with Dict instead of localStorage
+const myDict = new Dict('myData');
+myDict.set('key', 'value');
+const value = myDict.get('key');
+
+// Inter-object communication
+messnamed('myObject', 'bang'); // Send bang to named object
+
+// Console output
+post('Info message\n');
+error('Error message\n');
+cpost('Console message\n');
+```
+
+## File Organization
+
+### Library Structure
+- `lib/` - Core library files
+- `docs/` - Documentation and guides
+- `examples/` - Usage examples and demos
+- `tests/` - Test files (when added)
+
+### Import Order
+1. Error handling system (`m4l-errors.js`)
+2. Main library (`pdm.m4l.lib.js`)
+3. Custom extensions or utilities
+
+## Performance Considerations
+
+### Live API Usage
+- Minimize LiveAPI object creation
+- Reuse objects when possible
+- Use defer() for non-critical operations
+- Batch operations to reduce API calls
+
+### Memory Management
+- Always call freepeer() on LiveAPI objects
+- Avoid creating objects in loops
+- Use try-catch-finally for cleanup
+- Monitor memory usage in complex operations
