@@ -7,13 +7,13 @@
 
 ## Features
 
-- ** MIDI Management**: Create, modify, and manage MIDI clips and notes
-- ** Track Operations**: Work with Live tracks, clip slots, and scenes
-- ** Device Control**: Navigate and control Live devices
-- ** ID Handling**: Consistent and reliable ID management utilities
-- ** Task Scheduling**: Defer operations using Max's Task system
-- ** Error Handling**: Comprehensive validation and error checking
-- ** Full Documentation**: Complete API reference with examples
+- **MIDI Management**: Create, modify, and manage MIDI clips and notes
+- **Track Operations**: Work with Live tracks, clip slots, and scenes
+- **Device Control**: Navigate and control Live devices
+- **ID Handling**: Consistent and reliable ID management utilities
+- **Task Scheduling**: Defer operations using Max's Task system
+- **Error Handling**: Comprehensive validation and error checking
+- **Full Documentation**: Complete API reference with examples
 
 ## Quick Start
 
@@ -64,11 +64,11 @@ function createClip() {
 
 ## Documentation
 
-- **[Full API Documentation](docs/pdm.m4l.lib.documentation.md)** - Complete method reference
-- **[Usage Examples](docs/pdm.m4l.lib.documentation.md#usage-examples)** - Practical code samples
-- **[Best Practices](docs/pdm.m4l.lib.documentation.md#best-practices)** - Development guidelines
+- **[API Documentation](resources/pdm.m4l.lib.documentation.md)** - Complete method reference
+- **[Usage Examples](resources/pdm.m4l.lib.documentation.md#usage-examples)** - Practical code samples
+- **[Best Practices](resources/pdm.m4l.lib.documentation.md#best-practices)** - Development guidelines
 
-## 🔧 Core Methods
+## Core Methods
 
 ### ID Management
 - `conformId(id)` - Normalize various ID formats
