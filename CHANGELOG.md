@@ -31,7 +31,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Security
 - N/A
 
-## [1.0.0] - 2025-08-23
+## [0.0.1] - 2025-08-23
 
 ### Added
 - **Core Library**: Complete M4LLib class with static methods
@@ -60,3 +60,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Memory management with proper `freepeer()` calls
 - JSDoc documentation for all methods
 - Error handling with descriptive messages
+
+## [0.0.2] - 2025-08-24
+
+### Added
+- HTML API reference
+
+### Changed
+- Reorganized project structure
+
+
+### Deprecated
+- N/A
+
+### Removed
