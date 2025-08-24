@@ -1,6 +1,6 @@
 {
   "name": "m4l-lib",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A utility library for Max for Live (M4L) operations, providing helpful functions for interacting with Ableton Live's API",
   "main": "lib/pdm.m4l.lib.js",
   "keywords": [

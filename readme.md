@@ -1,7 +1,7 @@
 # M4LLib
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Version](https://img.shields.io/badge/version-1.0.0-blue.svg)](https://github.com/yourusername/M4LLib/releases)
+[![Version](https://img.shields.io/badge/version-0.0.2-blue.svg)](https://github.com/pdmeyer/M4LLib/releases)
 
 **M4LLib** is a comprehensive utility library for Max for Live (M4L) operations, providing helpful functions for interacting with Ableton Live's API. This library simplifies common operations like managing MIDI clips, tracks, and clip slots, making it easier to build powerful Max for Live devices.
 
