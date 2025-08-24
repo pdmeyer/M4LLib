@@ -87,6 +87,7 @@ try {
 
 ## Resource Management
 
+### Old Way (Manual Cleanup)
 ```javascript
 let liveApi = null;
 try {
@@ -98,6 +99,36 @@ try {
     if (liveApi) liveApi.freepeer();
 }
 ```
+
+### New Way (RAII Pattern)
+```javascript
+// Get a track property
+const trackName = M4LLib.withLiveAPI(trackId, (track) => {
+    return track.get('name');
+});
+
+// Set a device parameter
+M4LLib.withLiveAPI(deviceId, (device) => {
+    device.set('parameters 0', 0.5);
+});
+
+// Call a song method
+M4LLib.withLiveAPI('live_set', (song) => {
+    song.call('create_scene', -1);
+});
+
+// Work with any Live object
+const viewInfo = M4LLib.withLiveAPI('live_app view', (view) => {
+    return view.get('focused_view');
+});
+```
+
+**Benefits**:
+- Automatic cleanup with `freepeer()`
+- Cleaner, more readable code
+- No risk of memory leaks
+- Consistent error handling
+- Automatic ID format conversion (numeric → "id N" for LiveAPI)
 
 ## Common Use Cases
 

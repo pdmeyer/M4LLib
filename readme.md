@@ -62,7 +62,7 @@ function createClip() {
 }
 ```
 
-## 📖 Documentation
+## Documentation
 
 - **[Full API Documentation](docs/pdm.m4l.lib.documentation.md)** - Complete method reference
 - **[Usage Examples](docs/pdm.m4l.lib.documentation.md#usage-examples)** - Practical code samples
@@ -92,15 +92,7 @@ function createClip() {
 ### Utilities
 - `defer(fn, context, args, delay)` - Schedule delayed execution
 
-## 🎯 Use Cases
-
-- **MIDI Clip Generators**: Automatically create and populate MIDI clips
-- **Track Managers**: Organize and manage Live tracks programmatically
-- **Device Controllers**: Build custom device interfaces
-- **Automation Tools**: Create complex automation sequences
-- **Performance Tools**: Build live performance utilities
-
-## 🤝 Contributing
+## Contributing
 
 We welcome contributions! Please see our [Contributing Guidelines](CONTRIBUTING.md) for details.
 
@@ -112,7 +104,7 @@ We welcome contributions! Please see our [Contributing Guidelines](CONTRIBUTING.
 4. **Push** to the branch (`git push origin feature/amazing-feature`)
 5. **Open** a Pull Request
 
-## 🐛 Reporting Issues
+## Reporting Issues
 
 Found a bug or have a feature request? Please [open an issue](https://github.com/yourusername/M4LLib/issues) and include:
 
@@ -121,31 +113,27 @@ Found a bug or have a feature request? Please [open an issue](https://github.com
 - **Expected** vs actual behavior
 - **Environment** details (Max version, Live version, OS)
 
-## 📄 License
+## License
 
 This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) file for details.
 
 The MIT License is one of the most permissive open source licenses, allowing you to:
-- ✅ Use the code commercially
-- ✅ Modify the code
-- ✅ Distribute the code
-- ✅ Use it privately
-- ✅ Sublicense the code
+- Use the code commercially
+- Modify the code
+- Distribute the code
+- Use it privately
+- Sublicense the code
 
-## 🙏 Acknowledgments
+## Acknowledgments
 
 - **Max for Live** community for inspiration and feedback
 - **Ableton** for the Live API
 - **Cycling '74** for Max
 
-## 📞 Support
+    ## Support
 
 - **Documentation**: [Full docs](docs/pdm.m4l.lib.documentation.md)
 - **Issues**: [GitHub Issues](https://github.com/yourusername/M4LLib/issues)
 - **Discussions**: [GitHub Discussions](https://github.com/yourusername/M4LLib/discussions)
 
 ---
-
-**Made with ❤️ for the Max for Live community**
-
-*If this library helps you create something amazing, we'd love to hear about it!*
