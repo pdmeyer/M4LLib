@@ -3,17 +3,12 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Version](https://img.shields.io/badge/version-0.0.2-blue.svg)](https://github.com/pdmeyer/M4LLib/releases)
 
-**M4LLib** is a comprehensive utility library for Max for Live (M4L) operations, providing helpful functions for interacting with Ableton Live's API. This library simplifies common operations like managing MIDI clips, tracks, and clip slots, making it easier to build powerful Max for Live devices.
+**M4LLib** is a utility library for Max for Live (M4L) operations. It aims to provide an easy-to-use interface to Ableton Live's Live API by defining common patterns in a single library of functions.
 
-## Features
+**Please note** this library is a work in progress and is not yet ready for production use.
 
-- **MIDI Management**: Create, modify, and manage MIDI clips and notes
-- **Track Operations**: Work with Live tracks, clip slots, and scenes
-- **Device Control**: Navigate and control Live devices
-- **ID Handling**: Consistent and reliable ID management utilities
-- **Task Scheduling**: Defer operations using Max's Task system
-- **Error Handling**: Comprehensive validation and error checking
-- **Full Documentation**: Complete API reference with examples
+## Documentation
+Please see the [documentation](resources/pdm.m4l.lib.documentation.md) for a reference of the library's functions and a usage guide.
 
 ## Quick Start
 
@@ -106,7 +101,7 @@ We welcome contributions! Please see our [Contributing Guidelines](CONTRIBUTING.
 
 ## Reporting Issues
 
-Found a bug or have a feature request? Please [open an issue](https://github.com/yourusername/M4LLib/issues) and include:
+Found a bug or have a feature request? Please [open an issue](https://github.com/pdmeyer/M4LLib/issues) and include:
 
 - **Description** of the problem
 - **Steps** to reproduce
