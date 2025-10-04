@@ -137,21 +137,6 @@ function handleNotification() {
 }
 ```
 
-## API Reference
-
-For the complete API reference with all methods, parameters, and return types, see:
-
-- **[API.md](API.md)** - Markdown format API reference
-- **[HTML API Documentation](api/index.html)** - Beautiful, searchable HTML documentation with the clean-jsdoc-theme
-
-The API reference includes:
-- All public methods with detailed parameter descriptions
-- Return types and error conditions
-- Code examples for each method
-- Clean, focused documentation without extraneous error class details
-
-This documentation focuses on usage examples, best practices, and tutorials rather than API details.
-
 ## Usage Examples
 
 ### Basic Workflow: Creating and Populating a MIDI Clip
