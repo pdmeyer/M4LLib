@@ -1,8 +1,8 @@
 # Cursor IDE Setup for M4LLib
 
-This guide helps you configure Cursor IDE for optimal development of the M4LLib Max for Live library.
+This guide helps you configure Cursor IDE for development of the M4LLib Max for Live library.
 
-## 🎯 Overview
+## Overview
 
 Cursor IDE provides excellent AI-assisted development features that can be customized for Max for Live development. This guide covers:
 
@@ -119,7 +119,7 @@ if (typeof module !== 'undefined' && module.exports) {
 ### Key Points for Development
 - **Global Availability**: In Max for Live, classes are available globally via `global.M4LLibErrors` and `global.M4LLib`
 - **Compatibility**: The `exports = M4LLib` pattern is supported for Max for Live compatibility
-- **Loading Order**: Always include `m4l-errors.js` before `pdm.m4l.lib.js`
+- **Loading Order**: Always include `m4l-errors.js` before `m4l-lib.js`
 - **Access Pattern**: Functions are accessed directly: `M4LLib.getThisTrackId()`
 
 ### Testing Considerations
@@ -134,7 +134,7 @@ if (typeof module !== 'undefined' && module.exports) {
 try {
     const trackId = M4LLib.getThisTrackId();
     const notes = { notes: [{ pitch: 60, start_time: 0, duration: 1, velocity: 100 }] };
-    const success = M4LLib.dumpNoteToNextEmptyClipForTrack(trackId, notes, "My Clip");
+    const success = M4LLib.dumpNotesToNextEmptyClipForTrack(trackId, notes);
     return success;
 } catch (error) {
     M4LLibErrors.ErrorHandler.handle(error, 'createMidiClip', false);
@@ -175,11 +175,10 @@ try {
 - `lib/` - Core library files
 - `docs/` - Documentation and guides
 - `examples/` - Usage examples and demos
-- `tests/` - Test files (when added)
 
 ### Import Order
 1. Error handling system (`m4l-errors.js`)
-2. Main library (`pdm.m4l.lib.js`)
+2. Main library (`m4l-lib.js`)
 3. Custom extensions or utilities
 
 ## Performance Considerations

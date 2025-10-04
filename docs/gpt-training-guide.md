@@ -1,6 +1,6 @@
 # M4LLib GPT Training Guide
 
-This guide provides all the information needed to train a GPT (like ChatGPT) on the M4LLib library to help users find the right functions for their use cases.
+This guide provides all the information needed to train a GPT (like ChatGPT) on the M4LLib library to help users find the right functions for their use cases. You would use this MD file as the context for the GPT.
 
 ## Purpose
 
@@ -88,7 +88,7 @@ if (typeof module !== 'undefined' && module.exports) {
 ```
 
 **Usage in Max for Live**:
-- Include `m4l-errors.js` before `pdm.m4l.lib.js`
+- Include `m4l-errors.js` before `m4l-lib.js`
 - Access functions directly: `M4LLib.getThisTrackId()`
 - Access error classes: `M4LLibErrors.ErrorHandler.handle()`
 
@@ -106,7 +106,7 @@ if (typeof module !== 'undefined' && module.exports) {
 **When to use**: Creating, modifying, or managing MIDI clips and notes
 - `createNewEmptyMidiClip(length, clipSlotId)` - Create empty MIDI clips
 - `addNotesToClip(clip, notes)` - Add notes to existing clips
-- `dumpNoteToNextEmptyClipForTrack(trackId, notes, clipName)` - Create clips with notes
+- `dumpNotesToNextEmptyClipForTrack(trackId, notes)` - Create clips with notes
 
 #### Track Management
 **When to use**: Working with Live tracks, clip slots, and scenes
@@ -126,12 +126,12 @@ if (typeof module !== 'undefined' && module.exports) {
 ### 4. Common Use Case Patterns
 
 #### "I want to create a MIDI clip with notes"
-**Recommended functions**: `dumpNoteToNextEmptyClipForTrack()`
+**Recommended functions**: `dumpNotesToNextEmptyClipForTrack()`
 **Alternative approach**: `createNewEmptyMidiClip()` + `addNotesToClip()`
 **Example**:
 ```javascript
 const notes = { notes: [{ pitch: 60, start_time: 0, duration: 1, velocity: 100 }] };
-const success = M4LLib.dumpNoteToNextEmptyClipForTrack(trackId, notes, "My Clip");
+const success = M4LLib.dumpNotesToNextEmptyClipForTrack(trackId, notes);
 ```
 
 #### "I need to find an empty clip slot"
@@ -223,7 +223,7 @@ try {
 ```javascript
 function createMidiClip(trackId, notes, clipName) {
     try {
-        return M4LLib.dumpNoteToNextEmptyClipForTrack(trackId, notes, clipName);
+        return M4LLib.dumpNotesToNextEmptyClipForTrack(trackId, notes);
     } catch (error) {
         post('Failed to create clip: ', error.message, '\n');
         return false;

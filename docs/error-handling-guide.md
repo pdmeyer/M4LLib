@@ -18,7 +18,7 @@ The M4LLib error handling system provides:
 ```
 lib/
 ├── m4l-errors.js          # Error handling system
-├── pdm.m4l.lib.js         # Main library (updated with error handling)
+├── m4l-lib.js             # Main library (updated with error handling)
 examples/
 ├── error-handling-example.js  # Comprehensive examples
 docs/
@@ -36,7 +36,7 @@ In your Max for Live project, include the error handling system before the main 
 const M4LLibErrors = require("m4l-errors.js")M4LLibErrors;
 
 // Then include the main library
-const M4LLib = require("pdm.m4l.lib.js")M4LLib;
+const M4LLib = require("m4l-lib.js")M4LLib;
 ```
 
 ### 2. Basic Usage

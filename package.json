@@ -9,8 +9,7 @@
     "midi",
     "audio",
     "music-production",
-    "live-api",
-    "javascript"
+    "live-api"
   ],
   "author": "Philip Meyer",
   "license": "MIT",
@@ -27,17 +26,13 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "docs": "jsdoc lib/*.js -d docs/api -c jsdoc.json",
-    "docs:html": "jsdoc lib/*.js -d docs/html -c jsdoc.json",
-    "docs:api": "jsdoc lib/pdm.m4l.lib.js -d docs -c jsdoc.api.json",
-    "docs:md": "jsdoc2md lib/pdm.m4l.lib.js > docs/API.md",
-    "docs:clean": "rm -rf docs/html docs/api docs/API.md",
-    "docs:generate": "npm run docs:clean && npm run docs:md && npm run docs:html",
+    "docs": "jsdoc2md --heading-depth 2 --example-lang javascript --no-cache --private lib/m4l-lib.js | node scripts/post-process-docs.js > docs/API.md",
+    "docs:clean": "rm -rf docs/API.md",
+    "docs:generate": "npm run docs:clean && npm run docs",
     "lint": "echo \"Linting not yet configured\"",
     "build": "echo \"No build step required for M4L library\""
   },
   "devDependencies": {
-    "clean-jsdoc-theme": "^4.2.14",
     "jsdoc": "^4.0.2",
     "jsdoc-to-markdown": "^8.0.0"
   },

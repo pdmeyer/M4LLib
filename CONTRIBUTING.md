@@ -9,6 +9,7 @@ Thank you for your interest in contributing to M4LLib! This document provides gu
 We welcome various types of contributions:
 
 - ** Bug Reports**: Help us identify and fix issues
+- ** Recommendations**: Help us improve the library
 - ** Feature Requests**: Suggest new functionality
 - ** Documentation**: Improve guides and examples
 - ** Code Contributions**: Add new features or fix bugs
@@ -19,16 +20,8 @@ We welcome various types of contributions:
 
 1. **Check existing issues** to see if your idea has already been discussed
 2. **Read the documentation** to understand the current API
-3. **Test the library** to ensure you understand how it works
 
 ## Development Setup
-
-### Prerequisites
-
-- **Max for Live** environment
-- **Ableton Live** (for testing)
-- **Git** for version control
-- **Node.js** (optional, for development tools)
 
 ### Getting Started
 
@@ -51,53 +44,17 @@ We welcome various types of contributions:
 - Follow **JSDoc** documentation standards
 - Maintain **consistent indentation** (2 spaces)
 - Use **descriptive variable names**
-- Add **error handling** for all public methods
-
-### Max for Live Specific
-
-- Always **free LiveAPI objects** with `freepeer()`
-- Use **consistent ID handling** (numeric IDs)
+- Add **error handling** with try-catch blocks for all public methods
 - **Validate inputs** before processing
 - Provide **helpful error messages**
 
-### Example Code Style
+### Max for Live Standards
 
-```javascript
-/**
- * Creates a new MIDI clip with specified parameters
- * 
- * @static
- * @param {number} length - The length of the clip in beats
- * @param {string|number} clipSlotId - The clip slot ID
- * @returns {number|null} The created clip ID or null if failed
- * @throws {Error} If parameters are invalid
- */
-static createNewMidiClip(length, clipSlotId) {
-    // Validate inputs
-    if (!this.validateId(clipSlotId)) {
-        throw new Error('Invalid clip slot ID');
-    }
-    
-    if (typeof length !== 'number' || length <= 0) {
-        throw new Error('Length must be a positive number');
-    }
-    
-    try {
-        // Implementation here
-        const clipSlot = new LiveAPI(clipSlotId);
-        // ... rest of implementation
-        return clipId;
-    } catch (error) {
-        post('Error creating MIDI clip: ' + error.message + '\n');
-        return null;
-    } finally {
-        // Always clean up
-        if (clipSlot) clipSlot.freepeer();
-    }
-}
-```
+- Always **free LiveAPI objects** with `freepeer()` (or use `withLiveAPI`)
+- Always **free dictionaries** with `freepeer()`
+- Use **consistent ID handling** (numeric IDs, not ID strings like `id 1`)
 
-## 🧪 Testing
+## Testing
 
 ### Testing Guidelines
 
@@ -108,19 +65,16 @@ static createNewMidiClip(length, clipSlotId) {
 
 ### Test Scenarios
 
-- ✅ **Happy path**: Normal usage with valid inputs
-- ❌ **Error cases**: Invalid inputs, missing resources
-- 🔄 **Edge cases**: Boundary values, unusual scenarios
-- 🎵 **Real-world usage**: Actual Max for Live projects
+- **Happy path**: Normal usage with valid inputs
+- **Error cases**: Invalid inputs, missing resources
+- **Edge cases**: Boundary values, unusual scenarios
+- **Real-world usage**: Actual Max for Live projects
 
-## 📚 Documentation
+## Documentation
 
 ### Documentation Standards
 
-- **Update README.md** if adding new features
-- **Add JSDoc comments** for all new methods
-- **Include examples** in documentation
-- **Update CHANGELOG.md** for significant changes
+- **Add JSDoc comments** for all new methods. Documentation will be generated from these comments.
 
 ### Example Documentation
 
@@ -144,7 +98,7 @@ static createNewMidiClip(length, clipSlotId) {
  */
 ```
 
-## 🔄 Pull Request Process
+## Pull Request Process
 
 ### Before Submitting
 
@@ -184,7 +138,7 @@ Brief description of changes
 3. **Feedback** will be provided if changes are needed
 4. **Approval** and merge once everything looks good
 
-## 🐛 Bug Reports
+## Bug Reports
 
 ### Bug Report Template
 
@@ -213,7 +167,7 @@ What actually happens
 Screenshots, error messages, etc.
 ```
 
-## 💡 Feature Requests
+## Feature Requests
 
 ### Feature Request Template
 
@@ -234,7 +188,7 @@ Other approaches you've considered
 Any other relevant information
 ```
 
-## 📞 Getting Help
+## Getting Help
 
 ### Communication Channels
 
@@ -248,19 +202,4 @@ If you have questions about contributing:
 
 1. **Check the documentation** first
 2. **Search existing issues** for similar questions
-3. **Open a discussion** for general questions
-4. **Open an issue** for specific problems
-
-## 🙏 Recognition
-
-All contributors will be:
-
-- **Listed** in the README.md contributors section
-- **Mentioned** in release notes for significant contributions
-- **Thanked** in the project acknowledgments
-
----
-
-**Thank you for contributing to M4LLib!** 🎵
-
-Your contributions help make this library better for the entire Max for Live community.
+3. **Open an issue** 

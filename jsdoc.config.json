@@ -1,0 +1,30 @@
+{
+  "source": {
+    "include": ["./lib/m4l-lib.js"],
+    "includePattern": ".+\\.js$",
+    "excludePattern": "(node_modules/|docs/|m4l-errors.js)"
+  },
+  "opts": {
+    "destination": "./temp/",
+    "recurse": true
+  },
+  "plugins": ["plugins/markdown"],
+  "templates": {
+    "cleverLinks": false,
+    "monospaceLinks": false,
+    "default": {
+      "outputSourceFiles": false,
+      "includeDate": false,
+      "useLongnameInNav": true
+    }
+  },
+  "markdown": {
+    "parser": "gfm",
+    "hardwrap": false,
+    "idInHeadings": true
+  },
+  "tags": {
+    "allowUnknownTags": true,
+    "dictionaries": ["jsdoc"]
+  }
+}

@@ -1,0 +1,99 @@
+name: Documentation Check
+
+on:
+  pull_request:
+    branches: [ main, master ]
+    paths:
+      - 'lib/**'
+      - 'package.json'
+      - 'package-lock.json'
+
+jobs:
+  check-docs:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        cache: 'npm'
+        
+    - name: Install dependencies
+      run: npm ci
+      
+    - name: Generate documentation
+      run: |
+        echo "Checking if documentation can be generated..."
+        npm run docs:generate
+        
+    - name: Validate documentation format
+      run: |
+        if [ ! -f "docs/API.md" ]; then
+          echo "❌ API.md was not generated"
+          exit 1
+        fi
+        
+        # Check if the file has content
+        if [ ! -s "docs/API.md" ]; then
+          echo "❌ API.md is empty"
+          exit 1
+        fi
+        
+        # Check for basic markdown structure
+        if ! grep -q "## Classes" docs/API.md; then
+          echo "❌ API.md doesn't contain expected structure"
+          exit 1
+        fi
+        
+        echo "✅ Documentation generated successfully"
+        echo "📄 File size: $(wc -c < docs/API.md) bytes"
+        echo "📝 Lines: $(wc -l < docs/API.md)"
+        
+    - name: Comment PR status
+      uses: actions/github-script@v7
+      with:
+        script: |
+          const fs = require('fs');
+          const path = require('path');
+          
+          try {
+            const docsPath = path.join(process.cwd(), 'docs', 'API.md');
+            const docsContent = fs.readFileSync(docsPath, 'utf8');
+            const lines = docsContent.split('\n').length;
+            const size = Buffer.byteLength(docsContent, 'utf8');
+            
+            const comment = `## 📚 Documentation Check Passed
+            
+            ✅ **Documentation generation successful**
+            
+            **Generated file details:**
+            - File: \`docs/API.md\`
+            - Size: ${(size / 1024).toFixed(2)} KB
+            - Lines: ${lines}
+            
+            The documentation can be generated successfully from your JSDoc comments! 🎉`;
+            
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: comment
+            });
+          } catch (error) {
+            const comment = `## ❌ Documentation Check Failed
+            
+            The documentation generation failed. Please check your JSDoc comments and try again.
+            
+            **Error:** ${error.message}`;
+            
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: comment
+            });
+          }

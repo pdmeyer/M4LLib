@@ -5,7 +5,7 @@
 
 **M4LLib** is a utility library for Max for Live (M4L) operations. It aims to provide an easy-to-use interface to Ableton Live's Live API by defining common patterns in a single library of functions.
 
-**Please note** this library is a work in progress and is not yet ready for production use.
+**Please note** this library is a work in progress! Things will change, so if you are relying on the library for production use, consider forking the repository. 
 
 ## Documentation
 Please see the [documentation](resources/api-documentation.md) for a reference of the library's functions and a usage guide.
