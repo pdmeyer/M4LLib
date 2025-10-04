@@ -8,7 +8,7 @@
 **Please note** this library is a work in progress and is not yet ready for production use.
 
 ## Documentation
-Please see the [documentation](resources/pdm.m4l.lib.api-documentation.md) for a reference of the library's functions and a usage guide.
+Please see the [documentation](resources/api-documentation.md) for a reference of the library's functions and a usage guide.
 
 ## Quick Start
 
